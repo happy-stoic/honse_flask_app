@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honse Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1, h2, h3 {
+            color: #444;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .controls {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .display {
+            flex: 2;
+            min-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .parameter-group {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .parameter {
+            margin-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        #honseImage {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: #ddd;
+            cursor: pointer;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab.active {
+            background: white;
+            border-bottom: 2px solid #4CAF50;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .download-btn {
+            background: #2196F3;
+            margin-top: 20px;
+        }
+        
+        .download-btn:hover {
+            background: #0b7dda;
+        }
+        
+        .slider-value {
+            display: inline-block;
+            width: 40px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Honse Generator</h1>
+    <p>Generate your own customized honses (horses) with various parameters!</p>
+    
+    <div class="tabs">
+        <div class="tab active" data-tab="random">Random Honse</div>
+        <div class="tab" data-tab="custom">Custom Honse</div>
+        <div class="tab" data-tab="herd">Honse Herd</div>
+    </div>
+    
+    <div class="container">
+        <div class="controls">
+            <div id="random-tab" class="tab-content active">
+                <h2>Generate Random Honse</h2>
+                <p>Click the button to generate a random honse with unique characteristics.</p>
+                <button id="generateRandomBtn">Generate Random Honse</button>
+            </div>
+            
+            <div id="custom-tab" class="tab-content">
+                <h2>Customize Your Honse</h2>
+                <p>Adjust the parameters to create your perfect honse.</p>
+                
+                <div class="parameter-group">
+                    <h3>Body Parameters</h3>
+                    
+                    <div class="parameter">
+                        <label for="bodyLength">Body Length: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="bodyLength" name="body_length" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="bodyHeight">Body Height: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="bodyHeight" name="body_height" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="neckLength">Neck Length: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="neckLength" name="neck_length" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="neckThickness">Neck Thickness: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="neckThickness" name="neck_thickness" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="headSize">Head Size: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="headSize" name="head_size" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="legLength">Leg Length: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="legLength" name="leg_length" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="legThickness">Leg Thickness: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="legThickness" name="leg_thickness" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                </div>
+                
+                <div class="parameter-group">
+                    <h3>Mane & Tail</h3>
+                    
+                    <div class="parameter">
+                        <label for="maneLength">Mane Length: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="maneLength" name="mane_length" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="maneDensity">Mane Density: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="maneDensity" name="mane_density" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="tailLength">Tail Length: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="tailLength" name="tail_length" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="tailThickness">Tail Thickness: <span class="slider-value">1.0</span></label>
+                        <input type="range" id="tailThickness" name="tail_thickness" min="0.5" max="1.5" step="0.1" value="1.0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="maneStyle">Mane Style:</label>
+                        <select id="maneStyle" name="mane_style">
+                            <option value="flowing">Flowing</option>
+                            <option value="short">Short</option>
+                            <option value="mohawk">Mohawk</option>
+                            <option value="braided">Braided</option>
+                        </select>
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="tailStyle">Tail Style:</label>
+                        <select id="tailStyle" name="tail_style">
+                            <option value="flowing">Flowing</option>
+                            <option value="short">Short</option>
+                            <option value="braided">Braided</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="parameter-group">
+                    <h3>Pose & Style</h3>
+                    
+                    <div class="parameter">
+                        <label for="headAngle">Head Angle: <span class="slider-value">0</span>°</label>
+                        <input type="range" id="headAngle" name="head_angle" min="-30" max="30" step="5" value="0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="neckAngle">Neck Angle: <span class="slider-value">0</span>°</label>
+                        <input type="range" id="neckAngle" name="neck_angle" min="-20" max="40" step="5" value="0">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="tailAngle">Tail Angle: <span class="slider-value">45</span>°</label>
+                        <input type="range" id="tailAngle" name="tail_angle" min="0" max="90" step="5" value="45">
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="legPose">Leg Pose:</label>
+                        <select id="legPose" name="leg_pose">
+                            <option value="standing">Standing</option>
+                            <option value="walking">Walking</option>
+                            <option value="running">Running</option>
+                            <option value="rearing">Rearing</option>
+                        </select>
+                    </div>
+                    
+                    <div class="parameter">
+                        <label for="eyeStyle">Eye Style:</label>
+                        <select id="eyeStyle" name="eye_style">
+                            <option value="normal">Normal</option>
+                            <option value="cartoon">Cartoon</option>
+                            <option value="realistic">Realistic</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button id="generateCustomBtn">Generate Custom Honse</button>
+            </div>
+            
+            <div id="herd-tab" class="tab-content">
+                <h2>Generate Honse Herd</h2>
+                <p>Create a beautiful scene with multiple honses.</p>
+                
+                <div class="parameter">
+                    <label for="numHonses">Number of Honses: <span class="slider-value">5</span></label>
+                    <input type="range" id="numHonses" min="1" max="10" step="1" value="5">
+                </div>
+                
+                <button id="generateHerdBtn">Generate Honse Herd</button>
+            </div>
+        </div>
+        
+        <div class="display">
+            <h2>Your Honse</h2>
+            <div id="imageContainer">
+                <p>Your generated honse will appear here.</p>
+                <img id="honseImage" style="display: none;">
+            </div>
+            <button id="downloadBtn" class="download-btn" style="display: none;">Download Honse</button>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+            });
+        });
+        
+        // Update slider value displays
+        document.querySelectorAll('input[type="range"]').forEach(slider => {
+            const valueDisplay = slider.previousElementSibling.querySelector('.slider-value');
+            if (valueDisplay) {
+                valueDisplay.textContent = slider.value;
+                
+                slider.addEventListener('input', () => {
+                    valueDisplay.textContent = slider.value;
+                });
+            }
+        });
+        
+        // Generate random honse
+        document.getElementById('generateRandomBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/generate_random', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                const img = document.getElementById('honseImage');
+                img.src = data.image;
+                img.style.display = 'block';
+                
+                const downloadBtn = document.getElementById('downloadBtn');
+                downloadBtn.style.display = 'inline-block';
+                downloadBtn.onclick = () => {
+                    window.location.href = `/download/honse_${data.honse_id}.png`;
+                };
+                
+                // Display parameters if needed
+                console.log('Honse parameters:', data.params);
+            } catch (error) {
+                console.error('Error generating random honse:', error);
+            }
+        });
+        
+        // Generate custom honse
+        document.getElementById('generateCustomBtn').addEventListener('click', async () => {
+            try {
+                // Collect all parameters
+                const params = {};
+                document.querySelectorAll('#custom-tab input, #custom-tab select').forEach(input => {
+                    params[input.name] = input.value;
+                });
+                
+                const response = await fetch('/customize_honse', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ params })
+                });
+                
+                const data = await response.json();
+                
+                const img = document.getElementById('honseImage');
+                img.src = data.image;
+                img.style.display = 'block';
+                
+                const downloadBtn = document.getElementById('downloadBtn');
+                downloadBtn.style.display = 'inline-block';
+                downloadBtn.onclick = () => {
+                    window.location.href = `/download/honse_${data.honse_id}.png`;
+                };
+                
+                console.log('Custom honse parameters:', data.params);
+            } catch (error) {
+                console.error('Error generating custom honse:', error);
+            }
+        });
+        
+        // Generate honse herd
+        document.getElementById('generateHerdBtn').addEventListener('click', async () => {
+            try {
+                const numHonses = document.getElementById('numHonses').value;
+                
+                const response = await fetch('/generate_herd', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ num_honses: parseInt(numHonses) })
+                });
+                
+                const data = await response.json();
+                
+                const img = document.getElementById('honseImage');
+                img.src = data.image;
+                img.style.display = 'block';
+                
+                const downloadBtn = document.getElementById('downloadBtn');
+                downloadBtn.style.display = 'inline-block';
+                downloadBtn.onclick = () => {
+                    window.location.href = `/download/herd_${data.herd_id}.png`;
+                };
+            } catch (error) {
+                console.error('Error generating honse herd:', error);
+            }
+        });
+    </script>
+</body>
+</html>
